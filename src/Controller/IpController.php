@@ -52,41 +52,64 @@ class IpController implements ContainerInjectableInterface
      * ANY METHOD mountpoint/
      * ANY METHOD mountpoint/index
      *
+     * @return object
+     */
+    public function indexAction() : object
+    {
+        // Deal with the action and return a response.
+        $page = $this->di->get("page");
+
+        $page->add("anax/v2/ip/index");
+        return $page->render(
+            [
+                "title" => "Validera Ip-adress",
+                "baseTitle" => " | Anax development utilities"
+            ]
+        );
+    }
+
+
+
+    /**
+     * This is the index method action, it handles:
+     * ANY METHOD mountpoint
+     * ANY METHOD mountpoint/
+     * ANY METHOD mountpoint/index
+     *
      * @return string
      */
-    public function indexActionGet() : object
+    public function validateActionGet() : object
     {
         $page = $this->di->get("page");
         $response = $this->di->get("response");
         $request = $this->di->get("request");
-        $session = $this->di->get("session");
         $content = "";
-        $ip = "";
+        if ($request->getGet("data") == "json") {
+            return $response->redirect("ip/json?ip=" . $request->getGet("ip"));
+        }
+        $ipNumber = "";
+        $valid = false;
         $server = "";
         if ($request->getGet("ip")) {
-            $ip = trim($request->getGet("ip"));
+            $ipNumber = trim($request->getGet("ip"));
 
-            if (filter_var($ip, FILTER_VALIDATE_IP)) {
-                // $iptolocation = 'https://www.iplocate.io/api/lookup/' . $ip;
-                // $server = file_get_contents($iptolocation);
-                if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4)) {
-                    $content = "$ip är en giltig IPv4 adress";
-                    $server = gethostbyaddr($ip);
-                } elseif (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6)) {
-                    $content = "$ip är en giltig IPv6 adress";
+            if (filter_var($ipNumber, FILTER_VALIDATE_IP)) {
+                $valid = true;
+                if (filter_var($ipNumber, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4)) {
+                    $content = "$ipNumber är en giltig IPv4 adress";
+                    $server = gethostbyaddr($ipNumber);
+                } elseif (filter_var($ipNumber, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6)) {
+                    $content = "$ipNumber är en giltig IPv6 adress";
                 }
             } else {
-                $content = "$ip är inte en giltig IP adress";
+                $content = "$ipNumber är inte en giltig IP adress";
             }
         }
-
-        $page->add("anax/v2/ip/validate", 
-            [
-                "content" => $content,
-                "ip" => $ip,
-                "server" => $server
-            ]
-        );
+        $page->add("anax/v2/ip/validate", [
+            "content" => $content,
+            "ip" => $ipNumber,
+            "server" => $server
+        ]);
         return $page->render(
             [
                 "title" => "Validera Ip-adress",

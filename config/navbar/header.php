@@ -41,7 +41,16 @@ return [
         [
             "text" => "Ip",
             "url" => "ip",
-            "title" => "Ip denna webbplats.",
+            "title" => "Validera ip-adress.",
+            "submenu" => [
+                "items" => [
+                    [
+                        "text" => "Validera",
+                        "url" => "ip/validate",
+                        "title" => "Validera ip-adress.",
+                    ]
+                ],
+            ],
         ],
         [
             "text" => "Styleväljare",

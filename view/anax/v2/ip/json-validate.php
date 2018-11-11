@@ -17,25 +17,11 @@ $content = $content ?? null;
 
 ?><div class="$class">
     <h2>Validera ip-adress</h2>
-    <form>
+    <form method="post">
         <p>
             <label>Ip-adress:</label>
-            <input type="text" name="ip" value="<?= $ip ?>">
-        </p>
-        <p>
-            <label>Få svar som:</label>
-            <select name="data">
-                <option value="text">Text</option>
-                <option value="json">JSON</option>
-            </select>
+            <input type="text" name="ip" value="">
         </p>
         <button type="submit">Validera</button>
     </form>
-    <?php if ($content) : ?>
-        <pre>
-            <?= $content?>
-
-            Domän: <?= $server?>
-        </pre>
-    <?php endif ?>
 </div>

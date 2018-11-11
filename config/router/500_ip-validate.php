@@ -4,11 +4,27 @@
  */
 return [
     // Path where to mount the routes, is added to each route path.
+    "mount" => "ip",
     "routes" => [
         [
             "info" => "Validate ip-adress.",
-            "mount" => "ip",
+            "path" => "",
             "handler" => "\Anax\Controller\IpController",
+        ],
+        [
+            "info" => "Validate ip-adress.",
+            "path" => "validate",
+            "handler" => "\Anax\Controller\IpController",
+        ],
+        [
+            "info" => "Validate ip-adress.",
+            "path" => "json",
+            "handler" => "\Anax\Controller\JsonIpController",
+        ],
+        [
+            "info" => "Validate ip-adress.",
+            "path" => "testjson",
+            "handler" => "\Anax\Controller\JsonIpController",
         ],
     ]
 ];
