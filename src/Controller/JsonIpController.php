@@ -128,8 +128,6 @@ class JsonIpController implements ContainerInjectableInterface
 
             if (filter_var($ipNumber, FILTER_VALIDATE_IP)) {
                 $valid = true;
-                // $ipNumbertolocation = 'https://www.iplocate.io/api/lookup/' . $ipNumber;
-                // $server = file_get_contents($ipNumbertolocation);
                 if (filter_var($ipNumber, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4)) {
                     $message = "$ipNumber är en giltig IPv4 adress";
                     $server = gethostbyaddr($ipNumber);

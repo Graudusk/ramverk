@@ -59,7 +59,6 @@ class JsonIpControllerTest extends TestCase
     {
         $this->di->get("request")->setGet("ip", "1323");
         $res = $this->controller->jsonActionGet();
-        // $this->assertInstanceOf("\Anax\Response\Response", $res);
         $this->assertInternalType("array", $res);
 
         $json = $res[0];
@@ -75,7 +74,6 @@ class JsonIpControllerTest extends TestCase
     {
         $this->di->get("request")->setGet("ip", "123.123.123.123");
         $res = $this->controller->jsonActionGet();
-        // $this->assertInstanceOf("\Anax\Response\Response", $res);
         $this->assertInternalType("array", $res);
 
         $json = $res[0];
@@ -92,7 +90,6 @@ class JsonIpControllerTest extends TestCase
         $this->di->get("request")->setGet("ip", "2001:0db8:85a3:08d3:1319:8a2e:0370:7334");
         $res = $this->controller->jsonActionGet();
         $this->assertInternalType("array", $res);
-        // $this->assertInstanceOf("\Anax\Response\Response", $res);
 
         $json = $res[0];
         $exp = "2001:0db8:85a3:08d3:1319:8a2e:0370:7334 är en giltig IPv6 adress";

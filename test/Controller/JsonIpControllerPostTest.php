@@ -43,9 +43,14 @@ class JsonIpControllerPostTest extends TestCase
      */
     public function testValidatePostJsonError()
     {
-        $this->di->get("request")->setPost("ip", "1323");
+        $this->di->get("request")->setGlobals(
+            [
+                'post' => [
+                    'ip' => "1323"
+                ]
+            ]
+        );
         $res = $this->controller->jsonActionPost();
-        // $this->assertInstanceOf("\Anax\Response\Response", $res);
         $this->assertInternalType("array", $res);
 
         $json = $res[0];
@@ -59,9 +64,14 @@ class JsonIpControllerPostTest extends TestCase
      */
     public function testValidatePostIPv4Json()
     {
-        $this->di->get("request")->setPost("ip", "123.123.123.123");
+        $this->di->get("request")->setGlobals(
+            [
+                'post' => [
+                    'ip' => "123.123.123.123"
+                ]
+            ]
+        );
         $res = $this->controller->jsonActionPost();
-        // $this->assertInstanceOf("\Anax\Response\Response", $res);
         $this->assertInternalType("array", $res);
 
         $json = $res[0];
@@ -75,10 +85,15 @@ class JsonIpControllerPostTest extends TestCase
      */
     public function testValidatePostIPv6Json()
     {
-        $this->di->get("request")->setPost("ip", "2001:0db8:85a3:08d3:1319:8a2e:0370:7334");
+        $this->di->get("request")->setGlobals(
+            [
+                'post' => [
+                    'ip' => "2001:0db8:85a3:08d3:1319:8a2e:0370:7334"
+                ]
+            ]
+        );
         $res = $this->controller->jsonActionPost();
         $this->assertInternalType("array", $res);
-        // $this->assertInstanceOf("\Anax\Response\Response", $res);
 
         $json = $res[0];
         $exp = "2001:0db8:85a3:08d3:1319:8a2e:0370:7334 är en giltig IPv6 adress";

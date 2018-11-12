@@ -90,13 +90,6 @@ class IpControllerTest extends TestCase
         $this->di->get("request")->setGet("data", "json");
         $res = $this->controller->validateActionGet();
         $this->assertInstanceOf("\Anax\Response\Response", $res);
-        // $this->assertInternalType("array", $res);
-
-        // $body = $res->getBody();
-        // $exp = "ip/json?ip=123.123.123.123";
-        // $this->assertContains($exp, $res["headers"][0]);
-        
-        // $this->assertContains($exp, $res["message"]);
     }
 
 
