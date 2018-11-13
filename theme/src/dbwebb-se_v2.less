@@ -229,8 +229,18 @@ html.hgrid .inner-wrap {
 @bgColorBody: #333;
 @colorBody:   #DDD;
 
-@fontFamilyHeadings: @fontFamilyCambria;
-@fontFamilyBody:     @fontFamilyVerdana;
+/**
+ * Egna ändringar för typsnitt
+ */
+
+@import url('https://fonts.googleapis.com/css?family=Sanchez|Titillium+Web|Roboto|Ubuntu');
+@header-font: 'Sanchez', sans-serif;
+@font-logo: 'Sanchez', serif;
+@font-body: 'Ubuntu', serif;
+
+
+@fontFamilyHeadings: @header-font;
+@fontFamilyBody:     @font-body;
 @fontFamilyCode:     @fontFamilyCourier;
 
 @colorH1BorderBottom: #666; // Add to h4 also
@@ -239,7 +249,7 @@ html.hgrid .inner-wrap {
 @colorH4BorderBottom: #eee;
 
 @magicNumber:  24px;
-@fontSizeBody: 16px;
+@fontSizeBody: 18px;
 
 @columnWidth:   30;
 @gutterWidth:   10;

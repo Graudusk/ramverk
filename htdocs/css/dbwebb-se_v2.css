@@ -4969,7 +4969,7 @@ h4:hover .header-anchor {
 .bullet-list {
   margin-bottom: 24px;
   font-size: 0.875em;
-  line-height: 1.71428571;
+  line-height: 1.52380952;
 }
 .breadcrumb-list li a,
 .bullet-list li a {
@@ -5022,7 +5022,7 @@ a:hover {
 .blog-list .meta-footer,
 .blog-post .meta-footer {
   font-size: 0.875em;
-  line-height: 1.71428571;
+  line-height: 1.52380952;
   font-style: italic;
   color: #666;
 }
@@ -5066,7 +5066,7 @@ a:hover {
 }
 .blog-list h1 {
   font-size: 1.875em;
-  line-height: 1.6;
+  line-height: 1.42222222;
   border-bottom: 1px solid #ccc;
 }
 .blog-list h1 a {
@@ -5188,7 +5188,7 @@ body {
   padding: 0;
   color: #DDD;
   background-color: #333;
-  font: 100.01%/1.5 Verdana, Geneva, sans-serif;
+  font: 100.01%/1.33333333 'Ubuntu', serif;
 }
 h1,
 h2,
@@ -5196,7 +5196,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: Cambria, Georgia, Times, 'Times New Roman', serif;
+  font-family: 'Sanchez', sans-serif;
   margin-top: 24px;
   margin-bottom: 24px;
 }
@@ -5210,7 +5210,7 @@ h6 img {
 }
 h1 {
   font-size: 2.375em;
-  line-height: 1.26315789;
+  line-height: 1.12280702;
   font-weight: normal;
   border-bottom: 1px solid #666;
   margin-bottom: 23px;
@@ -5228,7 +5228,7 @@ h1 + h2 {
 }
 h2 {
   font-size: 1.875em;
-  line-height: 1.6;
+  line-height: 1.42222222;
   font-weight: normal;
   margin-top: 48px;
   margin-bottom: 23px;
@@ -5239,7 +5239,7 @@ h2 + h3 {
 }
 h3 {
   font-size: 1.375em;
-  line-height: 1.09090909;
+  line-height: 1.93939394;
   font-weight: normal;
   margin-top: 48px;
   margin-bottom: 23px;
@@ -5247,16 +5247,16 @@ h3 {
 }
 h4 {
   font-size: 1.25em;
-  line-height: 1.2;
+  line-height: 1.06666667;
   font-weight: normal;
 }
 h5 {
   font-size: 1em;
-  line-height: 1.5;
+  line-height: 1.33333333;
 }
 h6 {
   font-size: 0.875em;
-  line-height: 1.71428571;
+  line-height: 1.52380952;
 }
 p {
   margin-top: 24px;
@@ -5410,7 +5410,7 @@ article table caption,
 .table caption,
 .table2 caption {
   font-size: 0.875em;
-  line-height: 1.71428571;
+  line-height: 1.52380952;
   text-align: left;
   font-style: italic;
 }
@@ -6466,3 +6466,30 @@ a.rm-button.rm-clicked .rm-button-face-2 {
 /**
  * My settings.
  */
+/**
+ * Egna ändringar för typsnitt
+ */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto-Regular'), url(https://fonts.gstatic.com/s/roboto/v18/KFOmCnqEu92Fr1Mu4mxP.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Sanchez';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Sanchez'), local('Sanchez-Regular'), url(https://fonts.gstatic.com/s/sanchez/v5/Ycm2sZJORluHnXbIfmlR-A.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Titillium Web';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Titillium Web Regular'), local('TitilliumWeb-Regular'), url(https://fonts.gstatic.com/s/titilliumweb/v6/NaPecZTIAOhVxoMyOr9n_E7fdMPmCA.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Ubuntu';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Ubuntu Regular'), local('Ubuntu-Regular'), url(https://fonts.gstatic.com/s/ubuntu/v12/4iCs6KVjbNBYlgoKfw7z.ttf) format('truetype');
+}
