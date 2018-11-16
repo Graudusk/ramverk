@@ -16,7 +16,7 @@ $content = $content ?? null;
 
 
 ?><div class="$class">
-    <h2>Validera ip-adress</h2>
+    <h2>Hämta geografisk information</h2>
     <form>
         <p>
             <label>Ip-adress:</label>
@@ -35,7 +35,17 @@ $content = $content ?? null;
         <pre>
             <?= $message?>
 
-            Domän: <?= $host ? $host : "-" ?>
+            Domän: <?= $host?>
+
+            <?php if ($latitude) : ?>
+Plats: <?= $continent_name?>, <?= $country_name?>, <?= $city?>
+
+            Postnr: <?= $zip?>
+
+            Koordinat: <?= $latitude?>, <?= $longitude?>
+            <?php else : ?>
+Ingen geografisk data kunde hittas.
+            <?php endif ?>
         </pre>
     <?php endif ?>
 </div>

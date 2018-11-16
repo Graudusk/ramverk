@@ -81,38 +81,45 @@ class IpController implements ContainerInjectableInterface
     public function validateActionGet() : object
     {
         $page = $this->di->get("page");
-        $response = $this->di->get("response");
         $request = $this->di->get("request");
-        $content = "";
         if ($request->getGet("data") == "json") {
-            return $response->redirect("ip/json?ip=" . $request->getGet("ip"));
+            return $this->di->get("response")->redirect("ip/json?ip=" . $request->getGet("ip"));
         }
-        $ipNumber = "";
-        $valid = false;
-        $server = "";
-        if ($request->getGet("ip")) {
-            $ipNumber = trim($request->getGet("ip"));
-
-            if (filter_var($ipNumber, FILTER_VALIDATE_IP)) {
-                $valid = true;
-                if (filter_var($ipNumber, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4)) {
-                    $content = "$ipNumber är en giltig IPv4 adress";
-                    $server = gethostbyaddr($ipNumber);
-                } elseif (filter_var($ipNumber, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6)) {
-                    $content = "$ipNumber är en giltig IPv6 adress";
-                }
-            } else {
-                $content = "$ipNumber är inte en giltig IP adress";
-            }
-        }
-        $page->add("anax/v2/ip/validate", [
-            "content" => $content,
-            "ip" => $ipNumber,
-            "server" => $server
-        ]);
+        $client = $request->getServer('REMOTE_ADDR');
+        $ipAddress = $request->getGet("ip") ? $request->getGet("ip") : $client;
+        $ipm = new \Anax\IpModel\IpModel($ipAddress);
+        $page->add("anax/v2/ip/validate", $ipm->validateIp());
         return $page->render(
             [
                 "title" => "Validera Ip-adress",
+                "baseTitle" => " | Anax development utilities"
+            ]
+        );
+    }
+
+
+    /**
+     * This is the index method action, it handles:
+     * ANY METHOD mountpoint
+     * ANY METHOD mountpoint/
+     * ANY METHOD mountpoint/index
+     *
+     * @return string
+     */
+    public function geoInfoActionGet() : object
+    {
+        $page = $this->di->get("page");
+        $request = $this->di->get("request");
+        if ($request->getGet("data") == "json") {
+            return $this->di->get("response")->redirect("ip/geojson?ip=" . $request->getGet("ip"));
+        }
+        $client = $request->getServer('REMOTE_ADDR');
+        $ipAddress = $request->getGet("ip") ? $request->getGet("ip") : $client;
+        $ipm = new \Anax\IpModel\IpModel($ipAddress);
+        $page->add("anax/v2/ip/geoinfo", $ipm->fetchGeoInfo());
+        return $page->render(
+            [
+                "title" => "Hämta geografisk information från Ip-adress",
                 "baseTitle" => " | Anax development utilities"
             ]
         );

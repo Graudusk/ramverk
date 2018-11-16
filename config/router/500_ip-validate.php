@@ -26,5 +26,15 @@ return [
             "path" => "testjson",
             "handler" => "\Anax\Controller\JsonIpController",
         ],
+        [
+            "info" => "Get geographical information from ip-adress.",
+            "path" => "geoinfo",
+            "handler" => "\Anax\Controller\IpController",
+        ],
+        [
+            "info" => "Get geographical information from ip-adress.",
+            "path" => "geojson",
+            "handler" => "\Anax\Controller\JsonIpController",
+        ],
     ]
 ];

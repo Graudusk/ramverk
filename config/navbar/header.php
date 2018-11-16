@@ -48,6 +48,11 @@ return [
                         "text" => "Validera",
                         "url" => "ip/validate",
                         "title" => "Validera ip-adress.",
+                    ],
+                    [
+                        "text" => "GeoInfo",
+                        "url" => "ip/geoinfo",
+                        "title" => "Hämta geografisk info.",
                     ]
                 ],
             ],

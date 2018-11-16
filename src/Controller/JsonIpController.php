@@ -74,33 +74,8 @@ class JsonIpController implements ContainerInjectableInterface
     public function jsonActionGet() : array
     {
         $request = $this->di->get("request");
-        $message = "";
-        $ipNumber = "";
-        $server = "";
-        $valid = false;
-
-        if ($request->getGet("ip")) {
-            $ipNumber = trim($request->getGet("ip"));
-
-            if (filter_var($ipNumber, FILTER_VALIDATE_IP)) {
-                $valid = true;
-                if (filter_var($ipNumber, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4)) {
-                    $message = "$ipNumber är en giltig IPv4 adress";
-                    $server = gethostbyaddr($ipNumber);
-                } elseif (filter_var($ipNumber, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6)) {
-                    $message = "$ipNumber är en giltig IPv6 adress";
-                }
-            } else {
-                $message = "$ipNumber är inte en giltig IP adress";
-            }
-        }
-        $json = [
-            "ip" => $ipNumber,
-            "message" => $message,
-            "valid" => $valid,
-            "host" => $server
-        ];
-        return [$json];
+        $ipm = new \Anax\IpModel\IpModel($request->getGet("ip"));
+        return [$ipm->validateIp()];
     }
 
 
@@ -115,35 +90,46 @@ class JsonIpController implements ContainerInjectableInterface
      */
     public function jsonActionPost() : array
     {
-        // Deal with the action and return a response.
-
         $request = $this->di->get("request");
-        $message = "";
-        $ipNumber = "";
-        $server = "";
-        $valid = false;
+        $ipm = new \Anax\IpModel\IpModel($request->getPost("ip"));
+        return [$ipm->validateIp()];
+    }
 
-        if ($request->getPost("ip")) {
-            $ipNumber = trim($request->getPost("ip"));
 
-            if (filter_var($ipNumber, FILTER_VALIDATE_IP)) {
-                $valid = true;
-                if (filter_var($ipNumber, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4)) {
-                    $message = "$ipNumber är en giltig IPv4 adress";
-                    $server = gethostbyaddr($ipNumber);
-                } elseif (filter_var($ipNumber, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6)) {
-                    $message = "$ipNumber är en giltig IPv6 adress";
-                }
-            } else {
-                $message = "$ipNumber är inte en giltig IP adress";
-            }
-        }
-        $json = [
-            "ip" => $ipNumber,
-            "message" => $message,
-            "valid" => $valid,
-            "host" => $server
-        ];
-        return [$json];
+
+    /**
+     * This is the index method action, it handles:
+     * GET METHOD mountpoint
+     * GET METHOD mountpoint/
+     * GET METHOD mountpoint/index
+     *
+     * @return array
+     */
+    public function geojsonActionGet() : array
+    {
+        $request = $this->di->get("request");
+        $client = $request->getServer('REMOTE_ADDR');
+        $ipaddress = $request->getGet("ip") ? $request->getGet("ip") : $client;
+        $ipm = new \Anax\IpModel\IpModel($ipaddress);
+        return [$ipm->fetchGeoInfo()];
+    }
+
+
+
+    /**
+     * This is the index method action, it handles:
+     * GET METHOD mountpoint
+     * GET METHOD mountpoint/
+     * GET METHOD mountpoint/index
+     *
+     * @return array
+     */
+    public function geoJsonActionPost() : array
+    {
+        $request = $this->di->get("request");
+        $client = $request->getServer('REMOTE_ADDR');
+        $ipaddress = $request->getPost("ip") ? $request->getPost("ip") : $client;
+        $ipm = new \Anax\IpModel\IpModel($ipaddress);
+        return [$ipm->fetchGeoInfo()];
     }
 }
