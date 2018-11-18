@@ -14,8 +14,9 @@ $class   = $class ?? null;
 $content = $content ?? null;
 
 
+?>
 
-?><div class="$class">
+<div class="$class">
     <h2>Hämta geografisk information</h2>
     <form>
         <p>
@@ -29,7 +30,7 @@ $content = $content ?? null;
                 <option value="json">JSON</option>
             </select>
         </p>
-        <button type="submit">Validera</button>
+        <button type="submit">Hämta info</button>
     </form>
     <?php if ($message) : ?>
         <pre>
@@ -48,4 +49,13 @@ Ingen geografisk data kunde hittas.
             <?php endif ?>
         </pre>
     <?php endif ?>
+    <div id="map"></div>
 </div>
+
+
+<script type="text/javascript">
+    console.log("jej");
+    window.addEventListener('load', function() {
+        window.initMap(<?= $longitude?>, <?= $latitude?>, <?= $zoomLevel?>, <?= $radius?>);
+    })
+</script>

@@ -116,7 +116,7 @@ class IpController implements ContainerInjectableInterface
         $client = $request->getServer('REMOTE_ADDR');
         $ipAddress = $request->getGet("ip") ? $request->getGet("ip") : $client;
         $ipm = new \Anax\IpModel\IpModel($ipAddress);
-        $page->add("anax/v2/ip/geoinfo", $ipm->fetchGeoInfo());
+        $page->add("anax/v2/ip/geo-info", $ipm->fetchGeoInfo());
         return $page->render(
             [
                 "title" => "Hämta geografisk information från Ip-adress",
