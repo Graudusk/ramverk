@@ -25,24 +25,26 @@ trait IpModelGeoTrait
 
     public function getGeoInfo()
     {
-        return array_merge(array(
-            'continent_name' => $this->continent_name,
-            'country_name' => $this->country_name,
-            'city' => $this->city,
-            'zip' => $this->zip,
-            'latitude' => $this->latitude,
-            'longitude' => $this->longitude,
-            'mapUrl' => "https://www.openstreetmap.org/#map=12/$this->latitude/$this->longitude&layers=H"
-        ), $this->getZoomLevel());
+        return array_merge(
+            array(
+                'continent_name' => $this->continent_name,
+                'country_name' => $this->country_name,
+                'city' => $this->city,
+                'zip' => $this->zip,
+                'latitude' => $this->latitude,
+                'longitude' => $this->longitude,
+                'mapUrl' => "https://www.openstreetmap.org/#map=12/$this->latitude/$this->longitude&layers=H"
+            ), $this->getZoomLevel()
+        );
     }
 
     public function getZoomLevel()
     {
         $retArray;
-        if ($this->city) {
+        if ($this->city !== null) {
             $retArray = array("zoomLevel" => "12", "radius" => "600");
         } else {
-            $retArray = array("zoomLevel" => "1", "radius" => "60000000");
+            $retArray = array("zoomLevel" => "3", "radius" => "400000");
         }
         return $retArray;
     }
