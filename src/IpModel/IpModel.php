@@ -2,11 +2,16 @@
 /**
  * Showing off a standard class with methods and properties.
  */
-namespace Anax\IpModel;
+namespace Erjh17\IpModel;
 
-class IpModel
+use Anax\Commons\ContainerInjectableInterface;
+use Anax\Commons\ContainerInjectableTrait;
+
+class IpModel implements ContainerInjectableInterface
 {
     use IpModelGeoTrait;
+    use IpModelWeatherTrait;
+    use ContainerInjectableTrait;
     /**
      * @var int        $ipAddress  The ip address.
      * @var string     $message  The message.
@@ -18,28 +23,114 @@ class IpModel
     private $message;
     private $valid;
     private $host;
+    private $errorMsg;
+    private $ipstackkey;
+
+    const DATE_FORMAT = "%e %B %Y";
+    const TIME_FORMAT = "%R";
+    const DAY_FORMAT = "%A";
+
     /**
      * Constructor to create a Dice.
      *
-     * @param int    $sides  The number of sides of the Dice.
-     * @param int    $tossed  The number of times Dice has been tossed.
-     * @param int    $sum  The sum of the dice rolls.
+     * @param string $ipAddress The ip address to be stored.
      */
     public function __construct(string $ipAddress = null)
+    {
+        $this->setIpAddress($ipAddress);
+        $this->darkSkyUrl = "https://api.darksky.net/forecast/";
+        $this->ipUrl = "http://api.ipstack.com/";
+        $this->openCageUrl = "https://api.opencagedata.com/geocode/v1/json";
+        $this->errorMsg = "";
+    }
+
+    /**
+     * [setDarkskyKey description]
+     *
+     * @param [type] $key [description]
+     */
+    public function setIpstackKey($key)
+    {
+        $this->ipstackkey = $key;
+    }
+
+    /**
+     * [setIpAddress description]
+     *
+     * @param string|null $ipAddress [description]
+     */
+    public function setIpAddress(string $ipAddress = null)
     {
         $this->ipAddress = trim($ipAddress);
     }
 
-    public function getInfo()
+    /**
+     * [isValid description]
+     *
+     * @return boolean [description]
+     */
+    public function isValid()
     {
-        return array(
-            'ip' => $this->ipAddress,
-            'host' => $this->host,
-            'message' => $this->message,
-            'valid' => $this->valid
-        );
+        return $this->valid;
     }
 
+    /**
+     * Returns the data of the IpModel.
+     *
+     * @return [array] array of info.
+     */
+    public function getInfo()
+    {
+        // if ($this->isValid()) {
+            return array(
+                'ip' => $this->ipAddress,
+                'host' => $this->host,
+                'message' => $this->message,
+                'valid' => $this->valid,
+                'errorMsg' => $this->errorMsg
+            );
+        // } else {
+        //     return [
+        //         'message' => $this->message,
+        //         'ip' => $this->ipAddress,
+        //         'errorMsg' => $this->errorMsg
+        //     ];
+        // }
+    }
+
+    public function fillInfo($result, $keys)
+    {
+        foreach ($keys as $value) {
+            if (array_key_exists($value, $result)) {
+                $this->$value = $result[$value];
+            }
+        }
+    }
+
+    /**
+     * [pushInfo description]
+     *
+     * @param  [type] $result [description]
+     * @param  [type] $keys   [description]
+     *
+     * @return [type]         [description]
+     */
+    public function pushInfo($result, $keys)
+    {
+        $retArray = [];
+        foreach ($keys as $value) {
+            if (array_key_exists($value, $result)) {
+                $retArray[$value] = $result[$value];
+            }
+        }
+        return $retArray;
+    }
+
+    /**
+     * Validates the ip address stored in the Class instance.
+     *
+     * @return [array] Array with data
+     */
     public function validateIp()
     {
         if ($this->ipAddress) {

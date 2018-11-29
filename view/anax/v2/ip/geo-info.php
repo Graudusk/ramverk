@@ -13,7 +13,6 @@ namespace Anax\View;
 $class   = $class ?? null;
 $content = $content ?? null;
 
-
 ?>
 
 <div class="$class">
@@ -32,7 +31,7 @@ $content = $content ?? null;
         </p>
         <button type="submit">Hämta info</button>
     </form>
-    <?php if ($message) : ?>
+    <?php if (isset($message)) : ?>
         <pre>
             <?= $message?>
 
@@ -48,14 +47,18 @@ Plats: <?= $continent_name?>, <?= $country_name?>, <?= $city?>
 Ingen geografisk data kunde hittas.
             <?php endif ?>
         </pre>
+
+    <?php elseif ($errorMsg) : ?>
+        <pre class="error">
+            <?= $errorMsg ?>
+        </pre>
     <?php endif ?>
     <div id="map"></div>
 </div>
 
 
 <script type="text/javascript">
-    console.log("jej");
     window.addEventListener('load', function() {
         window.initMap(<?= $longitude?>, <?= $latitude?>, <?= $zoomLevel?>, <?= $radius?>);
-    })
+    });
 </script>

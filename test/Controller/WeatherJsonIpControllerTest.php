@@ -8,12 +8,11 @@ use PHPUnit\Framework\TestCase;
 /**
  * Test the IpController.
  */
-class GeoJsonIpControllerTest extends TestCase
+class WeatherJsonIpControllerTest extends TestCase
 {
     // Create the di container.
     protected $di;
     protected $controller;
-    protected $ipModel;
 
 
 
@@ -32,68 +31,68 @@ class GeoJsonIpControllerTest extends TestCase
         $di = $this->di;
 
         // Setup the controller
-        $this->controller = new JsonIpController();
+        $this->controller = new WeatherController();
         $this->controller->setDI($this->di);
         $this->controller->initialize();
     }
 
 
-
     /**
      * Test the route "index".
      */
-    public function testIndexAction()
+    public function testGetWeatherGetJsonError()
     {
-        $res = $this->controller->testJsonActionGet();
+        $this->di->get("request")->setGet("pos", "::1");
+        $res = $this->controller->getjsonActionGet();
         $this->assertInternalType("array", $res);
 
         $json = $res[0];
-        $exp = "db is active";
-        $this->assertContains($exp, $json["message"]);
+        $exp = "Kunde inte hämta position utifrån den angivna platsen.\n";
+        $this->assertContains($exp, $json["errorMsg"]);
     }
 
 
     /**
      * Test the route "index".
      */
-    public function testGetGeoGetJsonError()
+    public function testGetWeatherGetIpJson()
     {
-        $this->di->get("request")->setGet("ip", "1323");
-        $res = $this->controller->geoJsonActionGet();
+        $this->di->get("request")->setGet("pos", "123.123.123.123");
+        $res = $this->controller->getjsonActionGet();
         $this->assertInternalType("array", $res);
 
         $json = $res[0];
-        $exp = "1323 är inte en giltig IP adress";
-        $this->assertContains($exp, $json["message"]);
+        $exp = "icon";
+        $this->assertArrayHasKey($exp, $json["currently"]);
     }
 
 
     /**
      * Test the route "index".
      */
-    public function testGetGeoGetIPv4Json()
+    public function testGetWeatherGetPositionJson()
     {
-        $this->di->get("request")->setGet("ip", "123.123.123.123");
-        $res = $this->controller->geoJsonActionGet();
+        $this->di->get("request")->setGet("pos", "uppsala");
+        $res = $this->controller->getjsonActionGet();
         $this->assertInternalType("array", $res);
 
         $json = $res[0];
-        $exp = "123.123.123.123 är en giltig IPv4 adress";
-        $this->assertContains($exp, $json["message"]);
+        $exp = "icon";
+        $this->assertArrayHasKey($exp, $json["currently"]);
     }
 
 
     /**
      * Test the route "index".
      */
-    public function testGetGeoGetIPv6Json()
+    public function testGetWeatherGetCoordJson()
     {
-        $this->di->get("request")->setGet("ip", "2001:0db8:85a3:08d3:1319:8a2e:0370:7334");
-        $res = $this->controller->geoJsonActionGet();
+        $this->di->get("request")->setGet("pos", "59.8585,17.6454");
+        $res = $this->controller->getjsonActionGet();
         $this->assertInternalType("array", $res);
 
         $json = $res[0];
-        $exp = "2001:0db8:85a3:08d3:1319:8a2e:0370:7334 är en giltig IPv6 adress";
-        $this->assertContains($exp, $json["message"]);
+        $exp = "icon";
+        $this->assertArrayHasKey($exp, $json["currently"]);
     }
 }

@@ -31,11 +31,15 @@ $content = $content ?? null;
         </p>
         <button type="submit">Validera</button>
     </form>
-    <?php if ($message) : ?>
+    <?php if (isset($message)) : ?>
         <pre>
             <?= $message?>
 
             Domän: <?= $host ? $host : "-" ?>
+        </pre>
+    <?php elseif ($errorMsg) : ?>
+        <pre class="error">
+            <?= $errorMsg ?>
         </pre>
     <?php endif ?>
 </div>

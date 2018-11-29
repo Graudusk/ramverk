@@ -10,24 +10,22 @@ use Anax\Commons\ContainerInjectableTrait;
 // use Anax\Route\Exception\InternalErrorException;
 
 /**
- * A sample JSON controller to show how a controller class can be implemented.
+ * A sample controller to show how a controller class can be implemented.
  * The controller will be injected with $di if implementing the interface
  * ContainerInjectableInterface, like this sample class does.
  * The controller is mounted on a particular route and can then handle all
  * requests for that mount point.
+ *
+ * @SuppressWarnings(PHPMD.TooManyPublicMethods)
  */
-class JsonIpController implements ContainerInjectableInterface
+class WeatherController implements ContainerInjectableInterface
 {
     use ContainerInjectableTrait;
-
-
 
     /**
      * @var string $db a sample member variable that gets initialised
      */
     private $db = "not active";
-
-
 
     /**
      * The initialize method is optional and will always be called before the
@@ -46,73 +44,53 @@ class JsonIpController implements ContainerInjectableInterface
 
     /**
      * This is the index method action, it handles:
-     * GET METHOD mountpoint
-     * GET METHOD mountpoint/
-     * GET METHOD mountpoint/index
+     * ANY METHOD mountpoint
+     * ANY METHOD mountpoint/
+     * ANY METHOD mountpoint/index
      *
-     * @return array
+     * @return object
      */
-    public function testJsonActionGet() : array
+    public function indexAction() : object
     {
         // Deal with the action and return a response.
-        $json = [
-            "message" => __METHOD__ . ", \$db is {$this->db}",
-        ];
-        return [$json];
+        $page = $this->di->get("page");
+
+        $page->add("anax/v2/weather/index");
+        return $page->render(
+            [
+                "title" => "Få väderinformation",
+                "baseTitle" => " | Anax development utilities"
+            ]
+        );
     }
 
-
-
     /**
-     * This is the index method action, it handles:
-     * GET METHOD mountpoint
-     * GET METHOD mountpoint/
-     * GET METHOD mountpoint/index
+     * [getInfoAction description]
      *
-     * @return array
+     * @return [type] [description]
      */
-    public function jsonActionGet() : array
+    public function getInfoAction() : object
     {
         $request = $this->di->get("request");
-        $ipm = new \Erjh17\IpModel\IpModel($request->getGet("ip"));
-        return [$ipm->validateIp()];
-    }
+        $page = $this->di->get("page");
 
-
-
-    /**
-     * This is the index method action, it handles:
-     * GET METHOD mountpoint
-     * GET METHOD mountpoint/
-     * GET METHOD mountpoint/index
-     *
-     * @return array
-     */
-    public function jsonActionPost() : array
-    {
-        $request = $this->di->get("request");
-        $ipm = new \Erjh17\IpModel\IpModel($request->getPost("ip"));
-        return [$ipm->validateIp()];
-    }
-
-
-
-    /**
-     * This is the index method action, it handles:
-     * GET METHOD mountpoint
-     * GET METHOD mountpoint/
-     * GET METHOD mountpoint/index
-     *
-     * @return array
-     */
-    public function geojsonActionGet() : array
-    {
-        $request = $this->di->get("request");
-        $client = $request->getServer('REMOTE_ADDR');
-        $ipaddress = $request->getGet("ip") ? $request->getGet("ip") : $client;
+        if ($request->getGet("data") == "json") {
+            return $this->di->get("response")->redirect("weather/getjson?pos=" . $request->getGet("pos"));
+        }
+        $position = $request->getGet("pos");
         $ipm = $this->di->get("ipmodel");
-        $ipm->setIpAddress($ipaddress);
-        return [$ipm->fetchGeoInfo()];
+        if ($position) {
+            $ipm->setIpAddress($position);
+            $ipm->fetchGeoInfo();
+        }
+
+        $page->add("anax/v2/weather/weather-info", $ipm->fetchWeatherInfo());
+        return $page->render(
+            [
+                "title" => "Få väderinformation",
+                "baseTitle" => " | Anax development utilities"
+            ]
+        );
     }
 
 
@@ -125,14 +103,36 @@ class JsonIpController implements ContainerInjectableInterface
      *
      * @return array
      */
-    public function geoJsonActionPost() : array
+    public function getjsonActionGet() : array
     {
         $request = $this->di->get("request");
-        $client = $request->getServer('REMOTE_ADDR');
-        $ipaddress = $request->getPost("ip") ? $request->getPost("ip") : $client;
+        $position = $request->getGet("pos");
+
         $ipm = $this->di->get("ipmodel");
-        $ipm->setIpAddress($ipaddress);
-        // $ipm = new \Erjh17\IpModel\IpModel($ipaddress);
-        return [$ipm->fetchGeoInfo()];
+        $ipm->setIpAddress($position);
+        $ipm->fetchGeoInfo();
+        return [$ipm->fetchWeatherInfo()];
+    }
+
+
+
+    /**
+     * This is the index method action, it handles:
+     * GET METHOD mountpoint
+     * GET METHOD mountpoint/
+     * GET METHOD mountpoint/index
+     *
+     * @return array
+     */
+    public function getJsonActionPost() : array
+    {
+        $request = $this->di->get("request");
+
+        $position = $request->getPost("pos");
+
+        $ipm = $this->di->get("ipmodel");
+        $ipm->setIpAddress($position);
+        $ipm->fetchGeoInfo();
+        return [$ipm->fetchWeatherInfo()];
     }
 }

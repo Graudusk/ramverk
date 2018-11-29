@@ -87,7 +87,10 @@ class IpController implements ContainerInjectableInterface
         }
         $client = $request->getServer('REMOTE_ADDR');
         $ipAddress = $request->getGet("ip") ? $request->getGet("ip") : $client;
-        $ipm = new \Anax\IpModel\IpModel($ipAddress);
+        // $ipm = new \Erjh17\IpModel\IpModel($ipAddress);
+        $ipm = $this->di->get("ipmodel");
+        $ipm->setIpAddress($ipAddress);
+        // $ipm = new \Erjh17\IpModel\IpModel($position);
         $page->add("anax/v2/ip/validate", $ipm->validateIp());
         return $page->render(
             [
@@ -113,9 +116,11 @@ class IpController implements ContainerInjectableInterface
         if ($request->getGet("data") == "json") {
             return $this->di->get("response")->redirect("ip/geojson?ip=" . $request->getGet("ip"));
         }
-        $client = $request->getServer('REMOTE_ADDR');
-        $ipAddress = $request->getGet("ip") ? $request->getGet("ip") : $client;
-        $ipm = new \Anax\IpModel\IpModel($ipAddress);
+        $ipAddress = $request->getGet("ip") ? $request->getGet("ip") : $request->getServer('REMOTE_ADDR');
+        // $ipm = new \Erjh17\IpModel\IpModel($ipAddress);
+        $ipm = $this->di->get("ipmodel");
+        $ipm->setIpAddress($ipAddress);
+        // $ipm = new \Erjh17\IpModel\IpModel($position);
         $page->add("anax/v2/ip/geo-info", $ipm->fetchGeoInfo());
         return $page->render(
             [

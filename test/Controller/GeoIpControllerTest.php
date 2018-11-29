@@ -42,12 +42,12 @@ class GeoIpControllerTest extends TestCase
      */
     public function testGetGeoGetError()
     {
-        $this->di->get("request")->setGet("ip", "1323");
+        $this->di->get("request")->setGet("ip", "::1");
         $res = $this->controller->geoInfoActionGet();
         $this->assertInstanceOf("\Anax\Response\Response", $res);
 
         $body = $res->getBody();
-        $exp = "1323 är inte en giltig IP adress";
+        $exp = "Ingen geografisk data kunde hittas";
         $this->assertContains($exp, $body);
     }
 

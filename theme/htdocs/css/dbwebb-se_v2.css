@@ -5188,7 +5188,7 @@ body {
   padding: 0;
   color: #DDD;
   background-color: #333;
-  font: 100.01%/1.33333333 'Ubuntu', serif;
+  font: 100.01%/1.33333333 'Sanchez', serif;
 }
 h1,
 h2,
@@ -5196,7 +5196,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Sanchez', sans-serif;
+  font-family: 'Ubuntu', sans-serif;
   margin-top: 24px;
   margin-bottom: 24px;
 }
@@ -6446,10 +6446,18 @@ a.rm-button.rm-clicked .rm-button-face-2 {
 .site-logo-text {
   font-family: "Times New Roman", Times, serif;
   padding-left: 0.2em;
+  text-shadow: 2px -2px 2px #0f0f0f;
+}
+.site-logo-text a {
+  color: #ddd;
+}
+.site-logo-text a:hover {
+  color: #D0F02F;
+  text-shadow: 2px -2px 2px #67721F;
 }
 .rm-navbar {
   text-align: center;
-  font-family: Cambria, Georgia, Times, 'Times New Roman', serif;
+  font-family: 'Ubuntu', serif;
   font-size: 1.5em;
   line-height: 0;
 }
@@ -7098,4 +7106,200 @@ a.rm-button.rm-clicked .rm-button-face-2 {
 }
 #map {
   height: 300px;
+}
+.row {
+  display: block;
+  width: 101.04166667%;
+  margin-left: -0.52083333%;
+  margin-right: -0.52083333%;
+}
+.row::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+@media screen and (min-width: 650px) {
+  .col-sm-1 {
+    display: inline;
+    float: left;
+    width: 7.29166667%;
+    margin-left: 0.52083333%;
+    margin-right: 0.52083333%;
+  }
+  .col-sm-2 {
+    display: inline;
+    float: left;
+    width: 15.625%;
+    margin-left: 0.52083333%;
+    margin-right: 0.52083333%;
+  }
+  .col-sm-3 {
+    display: inline;
+    float: left;
+    width: 23.95833333%;
+    margin-left: 0.52083333%;
+    margin-right: 0.52083333%;
+  }
+  .col-sm-4 {
+    display: inline;
+    float: left;
+    width: 32.29166667%;
+    margin-left: 0.52083333%;
+    margin-right: 0.52083333%;
+  }
+  .col-sm-5 {
+    display: inline;
+    float: left;
+    width: 40.625%;
+    margin-left: 0.52083333%;
+    margin-right: 0.52083333%;
+  }
+  .col-sm-6 {
+    display: inline;
+    float: left;
+    width: 48.95833333%;
+    margin-left: 0.52083333%;
+    margin-right: 0.52083333%;
+  }
+  .col-sm-7 {
+    display: inline;
+    float: left;
+    width: 57.29166667%;
+    margin-left: 0.52083333%;
+    margin-right: 0.52083333%;
+  }
+  .col-sm-8 {
+    display: inline;
+    float: left;
+    width: 65.625%;
+    margin-left: 0.52083333%;
+    margin-right: 0.52083333%;
+  }
+  .col-sm-9 {
+    display: inline;
+    float: left;
+    width: 73.95833333%;
+    margin-left: 0.52083333%;
+    margin-right: 0.52083333%;
+  }
+  .col-sm-10 {
+    display: inline;
+    float: left;
+    width: 82.29166667%;
+    margin-left: 0.52083333%;
+    margin-right: 0.52083333%;
+  }
+  .col-sm-11 {
+    display: inline;
+    float: left;
+    width: 90.625%;
+    margin-left: 0.52083333%;
+    margin-right: 0.52083333%;
+  }
+  .col-sm-12 {
+    display: inline;
+    float: left;
+    width: 98.95833333%;
+    margin-left: 0.52083333%;
+    margin-right: 0.52083333%;
+  }
+}
+.text-center {
+  text-align: center;
+}
+.text-right {
+  text-align: right;
+}
+.text-left {
+  text-align: left;
+}
+.float-left {
+  float: left;
+}
+.float-right {
+  float: right;
+}
+pre.error {
+  white-space: pre-line;
+  padding: 15px 30px;
+  margin: 30px 0;
+  font-size: 200%;
+  color: red;
+  background: #101010;
+  font-weight: 600;
+}
+pre.code {
+  white-space: pre;
+  background-color: #eee;
+  color: #222;
+  padding: 0.5em;
+  border-left: 6px solid #aaa;
+}
+input[type="text"],
+input[type="number"],
+select,
+button,
+textarea {
+  color: #fff;
+  background-color: #222;
+  padding: 5px 10px;
+  border: #ddd solid 2px;
+}
+select {
+  padding: 3px 7px;
+}
+.forecastBox {
+  font-family: 'Ubuntu', sans-serif;
+}
+.forecastBox p {
+  margin: 12px 0;
+}
+.dailyRows .row:nth-child(even) .forecastBox {
+  float: right;
+}
+.weatherBox {
+  padding: 15px;
+  text-shadow: #333 1px 1px 1px;
+  color: #fff;
+}
+article.weatherBox {
+  width: 100%;
+  float: left;
+}
+.weatherBox.forecastBox {
+  margin-bottom: 15px;
+  min-height: 170px;
+}
+.weatherBox.clear-day {
+  background: url('../img/clear-sky.jpg');
+}
+.weatherBox.partly-cloudy-day {
+  background: url('../img/partly-cloudy-sky.jpg');
+}
+.weatherBox.rain,
+.weatherBox.snow,
+.weatherBox.sleet,
+.weatherBox.wind,
+.weatherBox.fog,
+.weatherBox.cloudy {
+  background-image: url('../img/cloudy_grey_sky.jpg');
+}
+.weatherBox.clear-night {
+  background-image: url('../img/night-sky.jpg');
+}
+.weatherBox.partly-cloudy-night {
+  background-image: url('../img/night-cloudy-sky.png');
+}
+.row h3 {
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+.pastDays .forecastBox {
+  min-height: 220px;
+}
+.pastDays .forecastBox.clear-night {
+  background-image: url('../img/clear-sky.jpg');
+}
+.pastDays .forecastBox.partly-cloudy-night {
+  background-image: url('../img/partly-cloudy-sky.jpg');
 }

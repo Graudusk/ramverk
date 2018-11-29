@@ -58,6 +58,25 @@ return [
             ],
         ],
         [
+            "text" => "Väder",
+            "url" => "weather",
+            "title" => "API för att hämta väderinformation.",
+            "submenu" => [
+                "items" => [
+                    [
+                        "text" => "Hämta info",
+                        "url" => "weather/getInfo",
+                        "title" => "Hämta väderinformation.",
+                    ]/*,
+                    [
+                        "text" => "GeoInfo",
+                        "url" => "weather/geoinfo",
+                        "title" => "Hämta geografisk info.",
+                    ]*/
+                ],
+            ],
+        ],
+        [
             "text" => "Verktyg",
             "url" => "verktyg",
             "title" => "Verktyg och möjligheter för utveckling.",

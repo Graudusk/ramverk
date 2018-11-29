@@ -198,6 +198,14 @@ html.hgrid .inner-wrap {
 .site-logo-text {
     font-family: @fontFamilySiteLogo;
     padding-left: 0.2em;
+    text-shadow: 2px -2px 2px #0f0f0f;
+    a {
+        color: #ddd;
+        &:hover {
+            color: #D0F02F;
+            text-shadow: 2px -2px 2px #67721F;
+        }
+    }
 }
 
 .rm-navbar {
@@ -234,9 +242,10 @@ html.hgrid .inner-wrap {
  */
 
 @import url('https://fonts.googleapis.com/css?family=Sanchez|Titillium+Web|Roboto|Ubuntu');
-@header-font: 'Sanchez', sans-serif;
-@font-logo: 'Sanchez', serif;
-@font-body: 'Ubuntu', serif;
+@header-font: 'Ubuntu', sans-serif;
+@font-logo: 'Ubuntu', serif;
+@font-body: 'Sanchez', serif;
+@fontFamilyCambria: 'Ubuntu', serif;;
 
 
 @fontFamilyHeadings: @header-font;
@@ -260,3 +269,139 @@ html.hgrid .inner-wrap {
 
 @import (less) "modules/leaflet.css";
 #map { height: 300px; }
+
+
+.row {
+    .row();
+}
+
+@media screen and (min-width: 650px) {
+    .col-sm-1 {#desinax-vgrid .column(2)}
+    .col-sm-2 {#desinax-vgrid .column(4)}
+    .col-sm-3 {#desinax-vgrid .column(6)}
+    .col-sm-4 {#desinax-vgrid .column(8)}
+    .col-sm-5 {#desinax-vgrid .column(10)}
+    .col-sm-6 {#desinax-vgrid .column(12)}
+    .col-sm-7 {#desinax-vgrid .column(14)}
+    .col-sm-8 {#desinax-vgrid .column(16)}
+    .col-sm-9 {#desinax-vgrid .column(18)}
+    .col-sm-10 {#desinax-vgrid .column(20)}
+    .col-sm-11 {#desinax-vgrid .column(22)}
+    .col-sm-12 {#desinax-vgrid .column(24)}
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.float-left {
+    float: left;
+}
+.float-right {
+    float: right;
+}
+
+pre {
+    &.error {
+        white-space: pre-line;
+        padding: 15px 30px;
+        margin: 30px 0;
+        font-size: 200%;
+        color: red;
+        background: #101010;
+        font-weight: 600;
+    }
+    &.code {
+        white-space: pre;
+        background-color: #eee;
+        color: #222;
+        padding: 0.5em;
+        border-left: 6px solid #aaa;
+    }
+}
+
+
+input[type="text"], input[type="number"], select, button, textarea {
+    color: #fff;
+    background-color: #222;
+    padding: 5px 10px;
+    border: #ddd solid 2px;
+}
+
+select {
+    padding: 3px 7px;
+}
+
+.forecastBox {
+    font-family: @header-font;
+    p {
+        margin: 12px 0;
+    }
+}
+
+.dailyRows {
+    .row:nth-child(even) .forecastBox {
+        float: right;
+    }
+}
+
+
+
+.weatherBox{
+    padding: 15px;
+    text-shadow: #333 1px 1px 1px;
+    color: #fff;
+    article& {
+        width: 100%;
+        float: left;
+    }
+    &.forecastBox {
+        margin-bottom: 15px;
+        min-height: 170px;
+    }
+    &.clear-day {
+        background: url('../img/clear-sky.jpg');
+    }
+    &.partly-cloudy-day {
+        background: url('../img/partly-cloudy-sky.jpg');
+    }
+    &.rain,
+    &.snow,
+    &.sleet,
+    &.wind,
+    &.fog,
+    &.cloudy {
+        background-image: url('../img/cloudy_grey_sky.jpg');
+    }
+    &.clear-night {
+        background-image: url('../img/night-sky.jpg');
+    }
+    &.partly-cloudy-night {
+        background-image: url('../img/night-cloudy-sky.png');
+    }
+}
+
+.row h3 {
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.pastDays {
+    .forecastBox {
+        min-height: 220px;
+        &.clear-night {
+            background-image: url('../img/clear-sky.jpg');
+        }
+        &.partly-cloudy-night {
+            background-image: url('../img/partly-cloudy-sky.jpg');
+        }
+    }
+}

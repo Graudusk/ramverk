@@ -1,9 +1,9 @@
 window.initMap = (function() {
     'use strict';
-    console.log("hej");
 
     var initMap = function(lon, lat, zoomLevel, radius) {
         if (document.getElementById('map')) {
+            console.log(lat, lon)
             var mymap = L.map('map').setView([lat, lon], zoomLevel );
             var circle = L.circle([lat, lon], {
                 color: 'blue',
