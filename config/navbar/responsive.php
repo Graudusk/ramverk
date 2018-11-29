@@ -31,6 +31,11 @@ return [
                         "url" => "redovisning/kmom02",
                         "title" => "Redovisning för kmom02.",
                     ],
+                    [
+                        "text" => "Kmom03",
+                        "url" => "redovisning/kmom03",
+                        "title" => "Redovisning för kmom03.",
+                    ],
                 ],
             ],
         ],
@@ -40,9 +45,42 @@ return [
             "title" => "Om denna webbplats.",
         ],
         [
-            "text" => "Styleväljare",
-            "url" => "style",
-            "title" => "Välj stylesheet.",
+            "text" => "Ip",
+            "url" => "ip",
+            "title" => "Validera ip-adress.",
+            "submenu" => [
+                "items" => [
+                    [
+                        "text" => "Validera",
+                        "url" => "ip/validate",
+                        "title" => "Validera ip-adress.",
+                    ],
+                    [
+                        "text" => "GeoInfo",
+                        "url" => "ip/geoinfo",
+                        "title" => "Hämta geografisk info.",
+                    ]
+                ],
+            ],
+        ],
+        [
+            "text" => "Väder",
+            "url" => "weather",
+            "title" => "API för att hämta väderinformation.",
+            "submenu" => [
+                "items" => [
+                    [
+                        "text" => "Hämta info",
+                        "url" => "weather/getInfo",
+                        "title" => "Hämta väderinformation.",
+                    ]/*,
+                    [
+                        "text" => "GeoInfo",
+                        "url" => "weather/geoinfo",
+                        "title" => "Hämta geografisk info.",
+                    ]*/
+                ],
+            ],
         ],
         [
             "text" => "Verktyg",

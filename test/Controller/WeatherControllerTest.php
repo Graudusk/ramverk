@@ -93,19 +93,19 @@ class WeatherControllerTest extends TestCase
     }
 
 
-    /**
-     * Test the route "index".
-     */
-    public function testGetWeatherGetPosition()
-    {
-        $this->di->get("request")->setGet("pos", "Uppsala");
-        $res = $this->controller->getInfoAction();
-        $this->assertInstanceOf("\Anax\Response\Response", $res);
+    // /**
+    //  * Test the route "index".
+    //  */
+    // public function testGetWeatherGetPosition()
+    // {
+    //     $this->di->get("request")->setGet("pos", "Uppsala");
+    //     $res = $this->controller->getInfoAction();
+    //     $this->assertInstanceOf("\Anax\Response\Response", $res);
 
-        $body = $res->getBody();
-        $exp = "Prognos (timvis)";
-        $this->assertContains($exp, $body);
-    }
+    //     $body = $res->getBody();
+    //     $exp = "Prognos (timvis)";
+    //     $this->assertContains($exp, $body);
+    // }
 
 
     /**

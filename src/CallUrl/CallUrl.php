@@ -79,8 +79,8 @@ class CallUrl implements ContainerInjectableInterface
         }
 
 
-        $json = json_decode(file_get_contents(__DIR__ . '/getjson.json'), true);
-        return $json;
+        // $json = json_decode(file_get_contents(__DIR__ . '/getjson.json'), true);
+        // return $json;
         $nodeCount = count($nodes);
 
         $curlArray = array();

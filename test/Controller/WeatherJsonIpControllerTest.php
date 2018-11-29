@@ -52,34 +52,34 @@ class WeatherJsonIpControllerTest extends TestCase
     }
 
 
-    /**
-     * Test the route "index".
-     */
-    public function testGetWeatherGetIpJson()
-    {
-        $this->di->get("request")->setGet("pos", "123.123.123.123");
-        $res = $this->controller->getjsonActionGet();
-        $this->assertInternalType("array", $res);
+    // /**
+    //  * Test the route "index".
+    //  */
+    // public function testGetWeatherGetIpJson()
+    // {
+    //     $this->di->get("request")->setGet("pos", "123.123.123.123");
+    //     $res = $this->controller->getjsonActionGet();
+    //     $this->assertInternalType("array", $res);
 
-        $json = $res[0];
-        $exp = "icon";
-        $this->assertArrayHasKey($exp, $json["currently"]);
-    }
+    //     $json = $res[0];
+    //     $exp = "icon";
+    //     $this->assertArrayHasKey($exp, $res["currently"]);
+    // }
 
 
-    /**
-     * Test the route "index".
-     */
-    public function testGetWeatherGetPositionJson()
-    {
-        $this->di->get("request")->setGet("pos", "uppsala");
-        $res = $this->controller->getjsonActionGet();
-        $this->assertInternalType("array", $res);
+    // /**
+    //  * Test the route "index".
+    //  */
+    // public function testGetWeatherGetPositionJson()
+    // {
+    //     $this->di->get("request")->setGet("pos", "uppsala");
+    //     $res = $this->controller->getjsonActionGet();
+    //     $this->assertInternalType("array", $res);
 
-        $json = $res[0];
-        $exp = "icon";
-        $this->assertArrayHasKey($exp, $json["currently"]);
-    }
+    //     $json = $res[0];
+    //     $exp = "icon";
+    //     $this->assertArrayHasKey($exp, $json["currently"]);
+    // }
 
 
     /**

@@ -81,21 +81,13 @@ class IpModel implements ContainerInjectableInterface
      */
     public function getInfo()
     {
-        // if ($this->isValid()) {
-            return array(
-                'ip' => $this->ipAddress,
-                'host' => $this->host,
-                'message' => $this->message,
-                'valid' => $this->valid,
-                'errorMsg' => $this->errorMsg
-            );
-        // } else {
-        //     return [
-        //         'message' => $this->message,
-        //         'ip' => $this->ipAddress,
-        //         'errorMsg' => $this->errorMsg
-        //     ];
-        // }
+        return array(
+            'ip' => $this->ipAddress,
+            'host' => $this->host,
+            'message' => $this->message,
+            'valid' => $this->valid,
+            'errorMsg' => $this->errorMsg
+        );
     }
 
     public function fillInfo($result, $keys)
