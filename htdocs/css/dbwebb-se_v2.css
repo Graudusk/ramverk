@@ -7118,7 +7118,10 @@ a.rm-button.rm-clicked .rm-button-face-2 {
   display: block;
   clear: both;
 }
-@media screen and (min-width: 650px) {
+.rm-navbar-max.rm-navbar {
+  display: none;
+}
+@media screen and (min-width: 801px) {
   .col-sm-1 {
     display: inline;
     float: left;
@@ -7202,6 +7205,11 @@ a.rm-button.rm-clicked .rm-button-face-2 {
     width: 98.95833333%;
     margin-left: 0.52083333%;
     margin-right: 0.52083333%;
+  }
+}
+@media screen and (max-width: 800px) {
+  .rm-navbar-max.rm-navbar {
+    display: inline-block;
   }
 }
 .text-center {
@@ -7302,4 +7310,22 @@ article.weatherBox {
 }
 .pastDays .forecastBox.partly-cloudy-night {
   background-image: url('../img/partly-cloudy-sky.jpg');
+}
+.region-header-col-2 {
+  display: block;
+  margin: auto;
+  float: none;
+}
+.outer-wrap-header {
+  background-color: #0c0c11;
+}
+.inner-wrap {
+  max-width: 960px;
+}
+.region-main {
+  width: auto;
+  margin: auto;
+}
+.outer-wrap-header {
+  margin-bottom: 0;
 }

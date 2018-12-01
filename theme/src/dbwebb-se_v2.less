@@ -275,7 +275,11 @@ html.hgrid .inner-wrap {
     .row();
 }
 
-@media screen and (min-width: 650px) {
+.rm-navbar-max.rm-navbar {
+    display: none;
+}
+
+@media screen and (min-width: 801px) {
     .col-sm-1 {#desinax-vgrid .column(2)}
     .col-sm-2 {#desinax-vgrid .column(4)}
     .col-sm-3 {#desinax-vgrid .column(6)}
@@ -288,6 +292,12 @@ html.hgrid .inner-wrap {
     .col-sm-10 {#desinax-vgrid .column(20)}
     .col-sm-11 {#desinax-vgrid .column(22)}
     .col-sm-12 {#desinax-vgrid .column(24)}
+}
+
+@media screen and (max-width: 800px) {
+    .rm-navbar-max.rm-navbar {
+        display: inline-block;
+    }
 }
 
 .text-center {
@@ -404,4 +414,28 @@ select {
             background-image: url('../img/partly-cloudy-sky.jpg');
         }
     }
+}
+
+.region-header-col-2 {
+    display: block;
+    margin: auto;
+    float: none;
+}
+
+.outer-wrap-header {
+    background-color: #0c0c11;
+}
+
+.inner-wrap {
+    max-width: 960px;
+}
+
+.region-main {
+    width: auto;
+    margin: auto;
+    // padding: 40px 80px;
+}
+
+.outer-wrap-header {
+    margin-bottom: 0;
 }
