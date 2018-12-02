@@ -2,12 +2,12 @@
 /**
  * Showing off a standard class with methods and properties.
  */
-namespace Erjh17\IpModel;
+namespace Erjh17\CallUrlModel;
 
 /**
- * A trait implementing IpModelGeoTrait.
+ * A trait implementing GeoModelTrait.
  */
-trait IpModelGeoTrait
+trait GeoModelTrait
 {
     // use \Erjh17\CallUrl;
     /**
@@ -77,7 +77,7 @@ trait IpModelGeoTrait
     public function getZoomLevel()
     {
         $retArray;
-        if (!$this->isValid()) {
+        if (!$this->isValidIp()) {
             $retArray = array("zoomLevel" => "12", "radius" => "600");
         } elseif ($this->city !== null) {
             $retArray = array("zoomLevel" => "12", "radius" => "600");
@@ -132,9 +132,9 @@ trait IpModelGeoTrait
     {
         $cUrl = $this->di->get("callurl");
         $this->validateIp();
-        if (!$this->isValid() && $this->isCoord($this->ipAddress)) {
+        if (!$this->isValidIp() && $this->isCoord($this->ipAddress)) {
             $this->setCoord();
-        } elseif ($this->isValid()) {
+        } elseif ($this->isValidIp()) {
             $apiResult = $this->getGeoFromIp();
 
             if ($apiResult) {

@@ -74,7 +74,8 @@ class JsonIpController implements ContainerInjectableInterface
     public function jsonActionGet() : array
     {
         $request = $this->di->get("request");
-        $ipm = new \Erjh17\IpModel\IpModel($request->getGet("ip"));
+        $ipm = $this->di->get("callurlmodel");
+        $ipm->setIpAddress($request->getGet("ip"));
         return [$ipm->validateIp()];
     }
 
@@ -91,7 +92,8 @@ class JsonIpController implements ContainerInjectableInterface
     public function jsonActionPost() : array
     {
         $request = $this->di->get("request");
-        $ipm = new \Erjh17\IpModel\IpModel($request->getPost("ip"));
+        $ipm = $this->di->get("callurlmodel");
+        $ipm->setIpAddress($request->getPost("ip"));
         return [$ipm->validateIp()];
     }
 
@@ -110,7 +112,7 @@ class JsonIpController implements ContainerInjectableInterface
         $request = $this->di->get("request");
         $client = $request->getServer('REMOTE_ADDR');
         $ipaddress = $request->getGet("ip") ? $request->getGet("ip") : $client;
-        $ipm = $this->di->get("ipmodel");
+        $ipm = $this->di->get("callurlmodel");
         $ipm->setIpAddress($ipaddress);
         return [$ipm->fetchGeoInfo()];
     }
@@ -130,9 +132,8 @@ class JsonIpController implements ContainerInjectableInterface
         $request = $this->di->get("request");
         $client = $request->getServer('REMOTE_ADDR');
         $ipaddress = $request->getPost("ip") ? $request->getPost("ip") : $client;
-        $ipm = $this->di->get("ipmodel");
+        $ipm = $this->di->get("callurlmodel");
         $ipm->setIpAddress($ipaddress);
-        // $ipm = new \Erjh17\IpModel\IpModel($ipaddress);
         return [$ipm->fetchGeoInfo()];
     }
 }

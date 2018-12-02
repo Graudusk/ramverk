@@ -78,7 +78,7 @@ class WeatherController implements ContainerInjectableInterface
             return $this->di->get("response")->redirect("weather/getjson?pos=" . $request->getGet("pos"));
         }
         $position = $request->getGet("pos");
-        $ipm = $this->di->get("ipmodel");
+        $ipm = $this->di->get("callurlmodel");
         if ($position) {
             $ipm->setIpAddress($position);
             $ipm->fetchGeoInfo();
@@ -107,8 +107,7 @@ class WeatherController implements ContainerInjectableInterface
     {
         $request = $this->di->get("request");
         $position = $request->getGet("pos");
-
-        $ipm = $this->di->get("ipmodel");
+        $ipm = $this->di->get("callurlmodel");
         $ipm->setIpAddress($position);
         $ipm->fetchGeoInfo();
         return [$ipm->fetchWeatherInfo()];
@@ -127,10 +126,8 @@ class WeatherController implements ContainerInjectableInterface
     public function getJsonActionPost() : array
     {
         $request = $this->di->get("request");
-
         $position = $request->getPost("pos");
-
-        $ipm = $this->di->get("ipmodel");
+        $ipm = $this->di->get("callurlmodel");
         $ipm->setIpAddress($position);
         $ipm->fetchGeoInfo();
         return [$ipm->fetchWeatherInfo()];

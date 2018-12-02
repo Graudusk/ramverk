@@ -7,11 +7,11 @@ namespace Erjh17\CallUrlModel;
 use Anax\Commons\ContainerInjectableInterface;
 use Anax\Commons\ContainerInjectableTrait;
 
-class IpModel implements ContainerInjectableInterface
+trait IpModelTrait
 {
-    use GeoModelTrait;
-    use WeatherModelTrait;
-    use ContainerInjectableTrait;
+    // use GeoModelTrait;
+    // use WeatherModelTrait;
+    // use ContainerInjectableTrait;
     /**
      * @var int        $ipAddress  The ip address.
      * @var string     $message  The message.
@@ -25,10 +25,6 @@ class IpModel implements ContainerInjectableInterface
     private $host;
     private $errorMsg;
     private $ipstackkey;
-
-    // const DATE_FORMAT = "%e %B %Y";
-    // const TIME_FORMAT = "%R";
-    // const DAY_FORMAT = "%A";
 
     /**
      * Constructor to create a Dice.
@@ -45,13 +41,23 @@ class IpModel implements ContainerInjectableInterface
     }
 
     /**
-     * [setDarkskyKey description]
+     * [setIpstackKey description]
      *
      * @param [type] $key [description]
      */
     public function setIpstackKey($key)
     {
         $this->ipstackkey = $key;
+    }
+
+    /**
+     * [setIpstackUrl description]
+     *
+     * @param [type] $url [description]
+     */
+    public function setIpstackUrl($url)
+    {
+        $this->ipUrl = $url;
     }
 
     /**
@@ -65,11 +71,11 @@ class IpModel implements ContainerInjectableInterface
     }
 
     /**
-     * [isValid description]
+     * [isValidIp description]
      *
      * @return boolean [description]
      */
-    public function isValid()
+    public function isValidIp()
     {
         return $this->valid;
     }

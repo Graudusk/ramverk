@@ -15,13 +15,4 @@
         </article>
     </div>
 <?php endforeach ?>
-<script type="text/javascript">
-    window.addEventListener('load', function() {
-        var skycons = new Skycons({"color": "white"});
-        <?php foreach ($days as $day) : ?>
-            skycons.add("icon<?= $day['time'] ?>", "<?= $day['icon'] ?>");
-            skycons.play();
-        <?php endforeach ?>
-    });
-</script>
 </section>

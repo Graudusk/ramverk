@@ -10,13 +10,4 @@
         </div>
     <?php endforeach ?>
 </div>
-<script type="text/javascript">
-    window.addEventListener('load', function() {
-        var skycons = new Skycons({"color": "white"});
-        <?php foreach ($pastDays as $day) : ?>
-            skycons.add("icon<?= $day['time'] ?>", "<?= $day['icon'] ?>");
-            skycons.play();
-        <?php endforeach ?>
-    });
-</script>
 </section>

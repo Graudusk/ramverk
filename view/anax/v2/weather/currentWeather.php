@@ -24,11 +24,3 @@
         <?php endif ?>
     </div>
 </div>
-<script type="text/javascript">
-    window.addEventListener('load', function() {
-        window.initMap(<?= $longitude?>, <?= $latitude?>, <?= $zoomLevel?>, <?= $radius?>);
-        var skycons = new Skycons({"color": "white"});
-        skycons.add("icon1", "<?= $currently['icon'] ?>");
-        skycons.play();
-    });
-</script>

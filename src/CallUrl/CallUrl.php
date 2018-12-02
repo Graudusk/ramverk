@@ -75,9 +75,9 @@ class CallUrl implements ContainerInjectableInterface
         $nodes = array();
 
         for ($i=0; $i < sizeof($urls); $i++) {
-            array_push($nodes, $this->buildUrl($urls[$i], $params[$i], $queries[$i]));
+            $url = $this->buildUrl($urls[$i], $params[$i], $queries[$i]);
+            array_push($nodes, $url);
         }
-
 
         // $json = json_decode(file_get_contents(__DIR__ . '/getjson.json'), true);
         // return $json;
@@ -87,7 +87,7 @@ class CallUrl implements ContainerInjectableInterface
         $master = curl_multi_init();
 
         for ($i = 0; $i < $nodeCount; $i++) {
-            $url =$nodes[$i];
+            $url = $nodes[$i];
             $curlArray[$i] = curl_init($url);
             curl_setopt($curlArray[$i], CURLOPT_RETURNTRANSFER, true);
             curl_multi_add_handle($master, $curlArray[$i]);
@@ -96,7 +96,6 @@ class CallUrl implements ContainerInjectableInterface
         do {
             curl_multi_exec($master, $running);
         } while ($running > 0);
-
 
         for ($i = 0; $i < $nodeCount; $i++) {
             $results[] = json_decode(curl_multi_getcontent($curlArray[$i]), true);

@@ -2,12 +2,12 @@
 /**
  * Showing off a standard class with methods and properties.
  */
-namespace Erjh17\IpModel;
+namespace Erjh17\CallUrlModel;
 
 /**
- * A trait implementing IpModelWeatherTrait.
+ * A trait implementing WeatherModelTrait.
  */
-trait IpModelWeatherTrait
+trait WeatherModelTrait
 {
     /**
      * Class handling logic for fetching and parsing weather data from API calls.

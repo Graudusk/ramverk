@@ -87,10 +87,10 @@ class IpController implements ContainerInjectableInterface
         }
         $client = $request->getServer('REMOTE_ADDR');
         $ipAddress = $request->getGet("ip") ? $request->getGet("ip") : $client;
-        // $ipm = new \Erjh17\IpModel\IpModel($ipAddress);
-        $ipm = $this->di->get("ipmodel");
+
+        $ipm = $this->di->get("callurlmodel");
         $ipm->setIpAddress($ipAddress);
-        // $ipm = new \Erjh17\IpModel\IpModel($position);
+
         $page->add("anax/v2/ip/validate", $ipm->validateIp());
         return $page->render(
             [
@@ -117,10 +117,8 @@ class IpController implements ContainerInjectableInterface
             return $this->di->get("response")->redirect("ip/geojson?ip=" . $request->getGet("ip"));
         }
         $ipAddress = $request->getGet("ip") ? $request->getGet("ip") : $request->getServer('REMOTE_ADDR');
-        // $ipm = new \Erjh17\IpModel\IpModel($ipAddress);
-        $ipm = $this->di->get("ipmodel");
+        $ipm = $this->di->get("callurlmodel");
         $ipm->setIpAddress($ipAddress);
-        // $ipm = new \Erjh17\IpModel\IpModel($position);
         $page->add("anax/v2/ip/geo-info", $ipm->fetchGeoInfo());
         return $page->render(
             [
