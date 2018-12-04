@@ -33,9 +33,9 @@ $request     = $di->get("request");
     <p>Du kan klicka på länkarna som tar dig till olika testanrop till API:et.</p>
 
     <ul>
-        <li><a href="weather/getJson?pos=Stockholm">weather/getJson?pos=Stockholm</a></li>
-        <li><a href="weather/getJson?pos=59.8585,17.6454">weather/getJson?pos=59.8585,17.6454</a></li>
-        <li><a href="weather/getJson?pos=83.252.70.69">weather/getJson?pos=83.252.70.69</a></li>
+        <li><a href="<?= url("weather/getJson?pos=Stockholm")?>">weather/getJson?pos=Stockholm</a></li>
+        <li><a href="<?= url("weather/getJson?pos=59.8585,17.6454")?>">weather/getJson?pos=59.8585,17.6454</a></li>
+        <li><a href="<?= url("weather/getJson?pos=83.252.70.69")?>">weather/getJson?pos=83.252.70.69</a></li>
     </ul>
 
     <h3">API-anrop</h3>

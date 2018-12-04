@@ -66,4 +66,6 @@ $content = $content ?? null;
     <a href="https://opencagedata.com">Geocoding from OpenCage Data Ltd.</a>
     <a href="https://ipstack.com/">Ip info from ipstack</a>
 </div>
-<script type="text/javascript"><?= $script ?></script>
+<?php if (isset($script)) : ?>
+    <script type="text/javascript"><?= $script ?></script>
+<?php endif; ?>

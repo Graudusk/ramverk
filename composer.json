@@ -11,7 +11,9 @@
         }
     },
     "require": {
-        "anax/anax-ramverk1-me": "^1.0.0"
+        "anax/anax-ramverk1-me": "^1.0.0",
+        "anax/remserver": "^2.1",
+        "graudusk/callurl": "dev-master"
     },
     "require-dev": {
         "phpunit/phpunit": "^7"

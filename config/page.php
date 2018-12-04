@@ -19,6 +19,7 @@ return [
             "lang" => "sv",
             "stylesheets" => [
                 "css/dbwebb-se_v2.min.css",
+                "css/leaflet.css",
             ],
             "javascripts" => [
                 "js/responsive-menu.js",
