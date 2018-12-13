@@ -11,9 +11,6 @@
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">
             <directory suffix=".php">src</directory>
-            <exclude>
-              <directory suffix=".php">src/Navigation</directory>
-            </exclude>
         </whitelist>
     </filter>
 
