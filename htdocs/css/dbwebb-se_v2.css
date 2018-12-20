@@ -7339,3 +7339,7 @@ article.weatherBox {
   border: 2px solid #555;
   border-radius: 5px;
 }
+
+.region-header-col-2 {
+    width: auto;
+}
